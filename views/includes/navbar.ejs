@@ -1,0 +1,72 @@
+<nav class="navbar navbar-expand-lg border-bottom sticky-top mb-4" style="background-color: white;">
+  <div class="container-fluid">
+
+    <!-- Brand Logo -->
+    <a class="navbar-brand" href="/" style="font-size: 31px; color: #db0a49;">
+      <i class="fa-regular fa-compass"></i>
+    </a>
+
+    <!-- Toggler for mobile -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <!-- Left side: Listings + Add New -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex align-items-center gap-2">
+        <li class="nav-item">
+          <a class="nav-link active text-black" aria-current="page" href="/listings">Listings</a>
+        </li>
+         <%  if(currUser){ %>
+          <li class="nav-item">
+          <a class="nav-link text-black" href="/profile">Profile</a>
+        </li>
+     <% } %>
+      </ul>
+
+      <!-- Center: Search Bar -->
+      <form class="d-flex mx-lg-auto my-2 my-lg-0 position-relative" style="max-width: 400px; width: 100%;" role="search" onsubmit="event.preventDefault();">
+        <input
+          id="searchInput"
+          class="form-control"
+          type="search"
+          placeholder="Search listings..."
+          aria-label="Search"
+          autocomplete="off"
+        />
+        <button class="btn btn-danger ms-2" type="submit">Search</button>
+        <div
+          id="results"
+          class="list-group position-absolute shadow"
+          style="z-index: 1050; max-height: 300px; overflow-y: auto; top: 100%; left: 0; right: 0; display: none;"
+        ></div>
+      </form>
+   
+      <!-- Right side: Login / Signup / Logout -->
+      <ul class="navbar-nav ms-auto mt-2 mt-lg-0 d-flex align-items-center gap-2">
+           <li class="nav-item">
+          <a class="nav-link text-black" href="/listings/new">Add new Listing</a>
+        </li>
+     <% if (!currUser) {%>
+           <li class="nav-item">
+          <a class="nav-link text-black" href="/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-black " href="/signup">Signup</a>
+        </li>
+     <% } %>
+     <%  if(currUser){ %>
+          <li class="nav-item">
+          <form method="get" action="/logout">
+            <button class="btn btn-outline-danger btn-sm" type="submit">Logout</button>
+          </form>
+        </li>
+       <%  } %>
+      </ul>
+    </div>
+    
+  </div>
+</nav>

@@ -1,0 +1,30 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+ .card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity:0.2;
+    background-color: #f0f8ff;
+}
+</style>
+<body>
+    <% if(currUser && currUser.id){ %>
+     <h2>@<%=currUser.username %></h2><br>
+<div class="d-flex flex-wrap justify-content-between mt-4 mb-3">
+  <% for (let datas of data) { %>
+    <a href="/listings/<%= datas.id %>" class="text-decoration-none text-dark">
+      <div class="card mt-3" style="width: 18rem;">
+          <div class="card-img-overlay "></div>
+        <img src="<%= datas.image.url %>" class="card-img-top" alt="listings" style="height:15rem;">
+        <div class="card-body">
+          <p class="card-text"><b><%= datas.title %></b><br>
+            <%= datas.price%>&#8377; /Night
+        </p>
+        </div>
+      </div>
+    </a>
+  <% } %>
+</div>
+<% } %>
+</body>

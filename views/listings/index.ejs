@@ -1,0 +1,139 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+ .card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity:0.2;
+    background-color: #f0f8ff;
+}
+#filters{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.filter{
+display: flex;
+flex-direction: column;
+align-items: center;
+margin-right: 1.5vw;
+margin-top: 1vw;
+opacity: 0.6;
+}
+.filter:hover{
+opacity: 1;
+cursor: pointer;
+}
+.filter>p{
+  font-size:1.2vw;
+}
+.tax{
+  display: none;
+}
+.info-tax{
+  border: 1px solid rgb(205, 195, 195);
+  padding:0.4vw 0.3vw;
+  border-radius: 2vw;
+}
+</style>
+
+    <!-- <h3 class="mt-3">All listings</h3> -->
+    <div id="filters">
+      <div class="filter">
+     <div><i class="fa-solid fa-fire"></i></div>
+      <p>Trending</p>
+      </div>
+
+         <div class="filter">
+     <div><i class="ri-hotel-bed-fill"></i></div>
+      <p>Rooms</p> 
+      </div>
+
+         <div class="filter">
+     <div><i class="ri-building-line"></i></div>
+      <p>Iconis</p> 
+      </div>
+
+         <div class="filter">
+     <div><i class="fa-solid fa-mountain-sun"></i></div>
+      <p>Mountains</p> 
+      </div>
+
+         <div class="filter">
+     <div><i class="fa-solid fa-umbrella-beach"></i></div>
+      <p>Beach</p> 
+      </div>
+
+         <div class="filter">
+     <div><i class="fa-solid fa-person-swimming"></i></div>
+      <p>Pool</p> 
+      </div>
+
+         <div class="filter">
+     <div><i class="fa-solid fa-sun"></i></div>
+      <p>Sunset</p> 
+      </div>
+
+         <div class="filter">
+     <div><i class="ri-tent-line"></i></div>
+      <p>Camping</p> 
+      </div>
+
+         <div class="filter">
+     <div><i class="fa-solid fa-cow"></i></div>
+      <p>Farms</p> 
+      </div>
+
+         <div class="filter">
+     <div><i class="ri-snowflake-line"></i></div>
+      <p>Arctic</p> 
+      </div>
+
+         <div class="filter">
+     <div><i class="fa-solid fa-hill-avalanche"></i></div>
+      <p>Hills</p> 
+     </div>
+   <div class="filter">
+     <div><i class="fa-solid fa-tree"></i></i></div>
+      <p>Forest</p> 
+      </div>
+
+     <div class="info-tax">
+        <div class="form-check-reverse form-switch mx-4">
+        <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+        <label class="form-check-label" for="switchCheckDefault">Dislay total after taxes</label>
+         </div>
+     </div>
+   
+  </div>
+
+
+<div class="d-flex flex-wrap gap-2  mt-4 mb-3">
+  <% for (let datas of data) { %>
+    <a href="/listings/<%= datas.id %>" class="text-decoration-none text-dark">
+      <div class="card mt-3" style="width: 18rem;">
+          <div class="card-img-overlay "></div>
+        <img src="<%= datas.image.url %>" class="card-img-top" alt="listings" style="height:15rem;">
+        <div class="card-body">
+          <p class="card-text"><b><%= datas.title %></b><br>
+            <%= datas.price%>&#8377; /Night
+            <i class="tax">&nbsp;+18% GST</i>
+        </p>
+        </div>
+      </div>
+    </a>
+  <% } %>
+</div>
+
+<script>
+  let taxSwitch = document.querySelector("input[type=checkbox]");
+let taxElements = document.querySelectorAll(".tax");
+let isVisible = false;
+taxSwitch.addEventListener("click", () => {
+  isVisible = !isVisible;
+  taxElements.forEach(element => {
+    element.style.display = isVisible ? "initial" : "none";
+  });
+});
+</script>
