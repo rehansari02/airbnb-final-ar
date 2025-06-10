@@ -30,7 +30,8 @@ router.route("/")
 
 
 // new listing added
-router.get("/new",isloggedIn,renderformNew)
+router.route("/new")
+.get(isloggedIn,renderformNew)
 
 
 router.route("/:id")
