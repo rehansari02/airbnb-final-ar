@@ -18,9 +18,8 @@ router.route('/signup')
 
 // user login
 
-router.route('/login')
-.get(renderLogin)
-.post(isSaveLogged,passport.authenticate("local",
+router.get('/login',renderLogin)
+router.post('/login',isSaveLogged,passport.authenticate("local",
     {
         failureRedirect:"/login",
         failureFlash:true
