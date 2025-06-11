@@ -134,10 +134,9 @@ app.get("/",(req,res,next)=>{
 
 
 
-app.use((req,res,next)=>{
-   next( new ExpresErr(404,"Page not Found"))
-    
-})
+app.use((req, res, next) => {
+   next(new ExpresErr(404, "Page not Found")); 
+});
 
 
 // error handle

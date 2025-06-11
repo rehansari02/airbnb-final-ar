@@ -6,9 +6,10 @@ module.exports.allListing=async(req,res,next)=>{
   res.render("listings/index.ejs",{data})
 }
 
-module.exports.renderformNew=(req,res,next)=>{
-  res.render("listings/new.ejs")
+module.exports.renderformNew=async (req, res, next) => {
+  return res.render("listings/new.ejs");
 }
+
 
 module.exports.newForm=async(req,res,next)=>{
     let url=req.file.path
