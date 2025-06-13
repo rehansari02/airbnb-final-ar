@@ -17,7 +17,7 @@ let newReview= new Review(req.body.review)
 
 module.exports.destroyReview=async(req,res,next)=>{
 let{id,reviewId}=req.params
-let data=await Listing.findByIdAndUpdate(id,{id:{$pull:{reviews:reviewId}}})
+let data=await Listing.findByIdAndUpdate(id,{$pull:{reviews:reviewId}})
 await Review.findByIdAndDelete(reviewId);
    req.flash("sucess","Review deleted successfull")
 res.redirect(`/listings/${data.id}`)
