@@ -1,5 +1,7 @@
 const User= require("../model/user");
-const Listing=require("../model/listing")
+const Listing=require("../model/listing");
+
+
 module.exports.renderUser=(req,res,next)=>{
     res.render("users/signup.ejs")
 }
