@@ -20,53 +20,46 @@
         <li class="nav-item">
           <a class="nav-link active text-black" aria-current="page" href="/listings">Listings</a>
         </li>
-         <%  if(currUser){ %>
+        <% if(currUser){ %>
           <li class="nav-item">
-          <a class="nav-link text-black" href="/profile">Profile</a>
-        </li>
-     <% } %>
+            <a class="nav-link text-black" href="/profile">Profile</a>
+          </li>
+          <% } %>
       </ul>
 
       <!-- Center: Search Bar -->
-      <form class="d-flex mx-lg-auto my-2 my-lg-0 position-relative" style="max-width: 400px; width: 100%;" role="search" onsubmit="event.preventDefault();">
-        <input
-          id="searchInput"
-          class="form-control"
-          type="search"
-          placeholder="Search listings..."
-          aria-label="Search"
-          autocomplete="off"
-        />
+      <form class="d-flex mx-lg-auto my-2 my-lg-0 position-relative" style="max-width: 400px; width: 100%;"
+        role="search" onsubmit="event.preventDefault();">
+        <input id="searchInput" class="form-control" type="search" placeholder="Search listings..." aria-label="Search"
+          autocomplete="off" />
         <button class="btn btn-danger ms-2" type="submit">Search</button>
-        <div
-          id="results"
-          class="list-group position-absolute shadow"
-          style="z-index: 1050; max-height: 300px; overflow-y: auto; top: 100%; left: 0; right: 0; display: none;"
-        ></div>
+        <div id="results" class="list-group position-absolute shadow"
+          style="z-index: 1050; max-height: 300px; overflow-y: auto; top: 100%; left: 0; right: 0; display: none;">
+        </div>
       </form>
-   
+
       <!-- Right side: Login / Signup / Logout -->
       <ul class="navbar-nav ms-auto mt-2 mt-lg-0 d-flex align-items-center gap-2">
-           <li class="nav-item">
+        <li class="nav-item">
           <a class="nav-link text-black" href="/listings/new">Add new Listing</a>
         </li>
-     <% if (!currUser) {%>
-           <li class="nav-item">
-          <a class="nav-link text-black" href="/login">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-black " href="/signup">Signup</a>
-        </li>
-     <% } %>
-     <%  if(currUser){ %>
+        <% if (!currUser) {%>
           <li class="nav-item">
-          <form method="get" action="/logout">
-            <button class="btn btn-outline-danger btn-sm" type="submit">Logout</button>
-          </form>
-        </li>
-       <%  } %>
+            <a class="nav-link text-black" href="/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-black " href="/signup">Signup</a>
+          </li>
+          <% } %>
+            <% if(currUser){ %>
+              <li class="nav-item">
+                <form method="get" action="/logout">
+                  <button class="btn btn-outline-danger btn-sm" type="submit">Logout</button>
+                </form>
+              </li>
+              <% } %>
       </ul>
     </div>
-    
+  
   </div>
 </nav>
