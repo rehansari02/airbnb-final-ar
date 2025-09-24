@@ -29,6 +29,7 @@ router.post('/login',isSaveLogged,passport.authenticate("local",
 // user logout
 router.get("/logout",logout)
 
+
 router.get("/search", Searching);
 
 

@@ -41,6 +41,7 @@ let store = MongoStore.create({
 });
 
 let Sessiondata = {
+  store,
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,

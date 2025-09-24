@@ -1,28 +1,21 @@
 <% layout("/layouts/boilerplate") %>
+
   <style>
-    .card-img-overlay {
-      opacity: 0;
-    }
-
-    .card-img-overlay:hover {
-      opacity: 0.2;
-      background-color: #f0f8ff;
-    }
-
     #filters {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-evenly;
+      margin-bottom: 2rem;
     }
 
     .filter {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-right: 1.5vw;
-      margin-top: 1vw;
+      margin: 0.5rem 1rem;
       opacity: 0.6;
+      transition: opacity 0.3s;
     }
 
     .filter:hover {
@@ -30,107 +23,101 @@
       cursor: pointer;
     }
 
-    .filter>p {
+    .filter p {
       font-size: 1.2vw;
-    }
-
-    .tax {
-      display: none;
+      margin-top: 0.3rem;
     }
 
     .info-tax {
       border: 1px solid rgb(205, 195, 195);
       padding: 0.4vw 0.3vw;
       border-radius: 2vw;
+      display: flex;
+      align-items: center;
+    }
+
+
+    .card {
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      /* soft shadow initially */
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: #fff;
+    }
+
+    .card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+
+    }
+
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .tax {
+      display: none;
+    }
+
+    .card-img-overlay {
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .card-img-overlay:hover {
+      opacity: 0.2;
+      background-color: #f0f8ff;
+    }
+
+    a.text-dark {
+      text-decoration: none;
+      color: inherit;
     }
   </style>
 
-  <!-- <h3 class="mt-3">All listings</h3> -->
+  <!-- ================= Filters ================= -->
   <div id="filters">
-    <div class="filter">
-      <div><i class="fa-solid fa-fire"></i></div>
-      <p>Trending</p>
-    </div>
+    <% const filterItems=[ { icon: "fa-solid fa-fire" , label: "Trending" }, { icon: "ri-hotel-bed-fill" ,
+      label: "Rooms" }, { icon: "ri-building-line" , label: "Iconis" }, { icon: "fa-solid fa-mountain-sun" ,
+      label: "Mountains" }, { icon: "fa-solid fa-umbrella-beach" , label: "Beach" }, {
+      icon: "fa-solid fa-person-swimming" , label: "Pool" }, { icon: "fa-solid fa-sun" , label: "Sunset" }, {
+      icon: "ri-tent-line" , label: "Camping" }, { icon: "fa-solid fa-cow" , label: "Farms" }, {
+      icon: "ri-snowflake-line" , label: "Arctic" }, { icon: "fa-solid fa-hill-avalanche" , label: "Hills" }, {
+      icon: "fa-solid fa-tree" , label: "Forest" } ]; %>
 
-    <div class="filter">
-      <div><i class="ri-hotel-bed-fill"></i></div>
-      <p>Rooms</p>
-    </div>
+      <% filterItems.forEach(item=> { %>
+        <div class="filter">
+          <div><i class="<%= item.icon %>"></i></div>
+          <p>
+            <%= item.label %>
+          </p>
+        </div>
+        <% }); %>
 
-    <div class="filter">
-      <div><i class="ri-building-line"></i></div>
-      <p>Iconis</p>
-    </div>
-
-    <div class="filter">
-      <div><i class="fa-solid fa-mountain-sun"></i></div>
-      <p>Mountains</p>
-    </div>
-
-    <div class="filter">
-      <div><i class="fa-solid fa-umbrella-beach"></i></div>
-      <p>Beach</p>
-    </div>
-
-    <div class="filter">
-      <div><i class="fa-solid fa-person-swimming"></i></div>
-      <p>Pool</p>
-    </div>
-
-    <div class="filter">
-      <div><i class="fa-solid fa-sun"></i></div>
-      <p>Sunset</p>
-    </div>
-
-    <div class="filter">
-      <div><i class="ri-tent-line"></i></div>
-      <p>Camping</p>
-    </div>
-
-    <div class="filter">
-      <div><i class="fa-solid fa-cow"></i></div>
-      <p>Farms</p>
-    </div>
-
-    <div class="filter">
-      <div><i class="ri-snowflake-line"></i></div>
-      <p>Arctic</p>
-    </div>
-
-    <div class="filter">
-      <div><i class="fa-solid fa-hill-avalanche"></i></div>
-      <p>Hills</p>
-    </div>
-    <div class="filter">
-      <div><i class="fa-solid fa-tree"></i></i></div>
-      <p>Forest</p>
-    </div>
-
-    <div class="info-tax">
-      <div class="form-check-reverse form-switch mx-4">
-        <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
-        <label class="form-check-label" for="switchCheckDefault">Dislay total after taxes</label>
-      </div>
-    </div>
+          <div class="info-tax">
+            <div class="form-check-reverse form-switch mx-4">
+              <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+              <label class="form-check-label" for="switchCheckDefault">Display total after taxes</label>
+            </div>
+          </div>
   </div>
 
-
+  <!-- ================= Listings ================= -->
   <div class="container mt-4 mb-3">
     <div class="row g-4">
       <% for (let datas of data) { %>
         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
           <a href="/listings/<%= datas.id %>" class="text-decoration-none text-dark">
-            <div class="card h-100 shadow-sm">
-              <img src="<%= datas.image.url %>" class="card-img-top" alt="listings"
-                style="height:200px; object-fit:cover;">
+            <div class="card h-100">
+              <img src="<%= datas.image.url %>" class="card-img-top" alt="listings">
               <div class="card-body">
-                <p class="card-text mb-1">
-                  <b>
+                <p class="card-text mb-1"><b>
                     <%= datas.title %>
-                  </b>
-                </p>
+                  </b></p>
                 <p class="card-text">
-                  <%= datas.price%>&#8377; /Night
+                  <%= datas.price %>&#8377; /Night
                     <i class="tax">&nbsp;+18% GST</i>
                 </p>
               </div>
@@ -141,15 +128,14 @@
     </div>
   </div>
 
-
+  <!-- ================= Script ================= -->
   <script>
-    let taxSwitch = document.querySelector("input[type=checkbox]");
-    let taxElements = document.querySelectorAll(".tax");
-    let isVisible = false;
-    taxSwitch.addEventListener("click", () => {
-      isVisible = !isVisible;
-      taxElements.forEach(element => {
-        element.style.display = isVisible ? "initial" : "none";
+    const taxSwitch = document.querySelector("#switchCheckDefault");
+    const taxElements = document.querySelectorAll(".tax");
+
+    taxSwitch.addEventListener("change", () => {
+      taxElements.forEach(el => {
+        el.style.display = taxSwitch.checked ? "inline" : "none";
       });
     });
   </script>
